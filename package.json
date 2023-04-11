@@ -1,0 +1,22 @@
+{
+  "name": "thanos",
+  "version": "1.0.0",
+  "description": "This package offers the functionality to delete half of the files from your file system randomly like Thanos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senghorn/Thanos.git"
+  },
+  "keywords": [
+    "thanos"
+  ],
+  "author": "sunny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/senghorn/Thanos/issues"
+  },
+  "homepage": "https://github.com/senghorn/Thanos#readme"
+}
