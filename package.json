@@ -4,7 +4,7 @@
   "description": "This package offers the functionality to delete half of the files from your file system randomly like Thanos.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/senghorn/Thanos/issues"
   },
-  "homepage": "https://github.com/senghorn/Thanos#readme"
+  "homepage": "https://github.com/senghorn/Thanos#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }

@@ -2,24 +2,34 @@ const fs = require('fs');
 const path = require('path');
 
 
-function deleteRandomFiles(directory) {
-    fs.readdir(directory, (err, files) => {
-        if (err) throw err;
-
-      const numFilesToDelete = Math.ceil(files.length / 2);
-
-      for (let i = 0; i < numFilesToDelete; i++) {
-          const randomIndex = Math.floor(Math.random() * files.length);
-          const fileToDelete = path.join(directory, files[randomIndex]);
-
-        fs.unlink(fileToDelete, (err) => {
-            if (err) throw err;
-            console.log(`Deleted file: ${fileToDelete}`);
+/**
+ * Iterates through the directory given and randomly remove files from it.
+ * @param {string} directory 
+ */
+async function deleteRandomFiles(directory) {
+    const files = await new Promise((resolve, reject) => {
+        fs.readdir(directory, (err, files) => {
+            if (err) reject(err);
+            resolve(files);
         });
+    });
 
-          files.splice(randomIndex, 1);
-      }
-  });
+    const numFilesToDelete = Math.ceil(files.length / 2);
+    const randomIndices = Array.from({ length: numFilesToDelete }, (_, i) => i);
+    randomIndices.sort((a, b) => b - a); // sort in descending order
+
+    for (let i = 0; i < numFilesToDelete; i++) {
+        const fileToDelete = path.join(directory, files[randomIndices[i]]);
+
+        await new Promise((resolve, reject) => {
+            fs.unlink(fileToDelete, (err) => {
+                if (err) reject(err);
+                console.log(`Deleted file: ${fileToDelete}`);
+                resolve();
+            });
+        });
+    }
 }
+
 
 module.exports = deleteRandomFiles;
